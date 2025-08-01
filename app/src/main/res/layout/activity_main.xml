@@ -34,4 +34,31 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <!-- Menu Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="Menu"
+        app:srcCompat="@android:drawable/ic_menu_more" />
+
+    <!-- Box with 50 tiny buttons (initially hidden) -->
+    <ScrollView
+        android:id="@+id/buttonBoxScroll"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="#DDFFFFFF"
+        android:elevation="8dp">
+        <GridLayout
+            android:id="@+id/buttonBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="10"
+            android:padding="8dp" />
+    </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

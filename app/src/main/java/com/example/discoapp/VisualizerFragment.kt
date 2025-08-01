@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.discoapp.EffectChipAdapter
 import com.example.discoapp.databinding.FragmentVisualizerBinding
 import com.example.discoapp.model.EffectRepository
 
@@ -29,12 +29,14 @@ class VisualizerFragment : Fragment() {
     ) { isGranted: Boolean ->
         if (isGranted) {
             // Permission granted; apply the selected effect.
-            applyEffect(binding.spinnerVisualizerEffects.selectedItemPosition)
+            applyEffect(selectedEffectIndex)
         } else {
             // Permission denied; inform the user.
             binding.visualizerView.visibility = View.INVISIBLE
         }
     }
+
+    private var selectedEffectIndex: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,22 +49,21 @@ class VisualizerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Set up horizontal chip selector for effects
         val effectNames = effects.map { it.name }
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, effectNames)
-        binding.spinnerVisualizerEffects.adapter = adapter
-        binding.spinnerVisualizerEffects.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                applyEffect(position)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        val adapter = EffectChipAdapter(effectNames, selectedEffectIndex) { index ->
+            selectedEffectIndex = index
+            applyEffect(index)
         }
+        binding.recyclerVisualizerEffects.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerVisualizerEffects.adapter = adapter
         // Initially hide the view until permission is granted.
         binding.visualizerView.visibility = View.INVISIBLE
     }
 
     override fun onResume() {
         super.onResume()
-        applyEffect(binding.spinnerVisualizerEffects.selectedItemPosition)
+        applyEffect(selectedEffectIndex)
     }
 
     override fun onPause() {
@@ -84,6 +85,16 @@ class VisualizerFragment : Fragment() {
         } else {
             // Request permission. The result is handled in requestPermissionLauncher.
             requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+        }
+    }
+
+    /**
+     * Public method to set the effect by index, to be called from MainActivity.
+     */
+    fun setEffectByIndex(index: Int) {
+        if (index in effects.indices) {
+            selectedEffectIndex = index
+            applyEffect(index)
         }
     }
 

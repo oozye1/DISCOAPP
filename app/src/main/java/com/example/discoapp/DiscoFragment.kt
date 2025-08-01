@@ -55,6 +55,12 @@ class DiscoFragment : Fragment() {
         }
     }
 
+    fun setEffectByIndex(index: Int) {
+        if (index in effects.indices) {
+            binding.spinnerDiscoEffects.setSelection(index)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
