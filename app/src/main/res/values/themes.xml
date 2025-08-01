@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.DiscoApp" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary branding color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <!-- Secondary branding color. -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- Background color. -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <!-- AppBar. -->
+        <item name="toolbarStyle">@style/Widget.DiscoApp.Toolbar</item>
+    </style>
+
+    <style name="Theme.DiscoApp.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+    </style>
+
+    <!-- Custom toolbar style for the top app bar -->
+    <style name="Widget.DiscoApp.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="titleTextColor">@color/colorOnSurface</item>
+        <item name="subtitleTextColor">@color/colorOnSurface</item>
+    </style>
+
+</resources>

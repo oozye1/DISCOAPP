@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Disco App</string>
+    <string name="disco_mode">Disco Mode</string>
+    <string name="visualizer_mode">Visualizer Mode</string>
+    <string name="select_effect">Select Effect</string>
+    <string name="permission_denied">Audio permission is required to use the visualizer.</string>
+</resources>
